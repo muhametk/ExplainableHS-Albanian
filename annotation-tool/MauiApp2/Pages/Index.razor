@@ -1,0 +1,143 @@
+﻿@page "/"
+@using MauiApp2.Data
+@using Microsoft.ML
+@using Microsoft.Data.Analysis
+@using System.Diagnostics
+@using Microsoft.Maui.Storage
+@inject IJSRuntime JS
+
+
+<div class="d-flex justify-content-center" style="">
+    The following text was categorized as offensive, please select the hateful/offensive parts of the example:
+</div>
+
+<div class="hr"></div>
+<hr>
+
+@*<div>
+    Annotated file located at: @saveDir
+</div>
+*@
+@*<hr />*@
+
+<div style="padding-bottom=10px">
+    Sample @(currentIndex + 1) from @df.Rows.Count
+</div>
+
+<div>
+    @errorMsg
+</div>
+
+@if (!isDone)
+{
+    <div class="card">
+        <div class="card-body">
+            @if (words != null)
+            {
+
+                @for (int i = 0; i < words.Length; i++)
+                {
+                    var j = i;
+                    var id = $"button_{words[j]}_{j}";
+                    <button class="btn @(words_selected[j]==1?"btn-outline-warning":"") rationale_btn" id="@id" style="margin-right: 1px !important" @onclick="() => selectWord(j, id)">@words[i]</button>
+                }
+            }
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" @onclick="ChangeRow">Next sample</button>
+        </div>
+    </div>
+
+} else {
+    <div class="card">
+        <div class="card-body">
+            <h1>Finished annotating all samples.</h1>
+        </div>
+    </div>
+}
+
+@code {
+    string saveDir = "";
+    string errorMsg = "";
+
+    bool isDone = false;
+    DataFrame df = new DataFrame();
+
+    DataFrame finalDf = new DataFrame(columns: new DataFrameColumn[]
+    {
+        new PrimitiveDataFrameColumn<int>("id"),
+        new StringDataFrameColumn("text"),
+        new PrimitiveDataFrameColumn<int>("subtask_a"),
+        new PrimitiveDataFrameColumn<int>("subtask_b"),
+        new PrimitiveDataFrameColumn<int>("subtask_c"),
+        new StringDataFrameColumn("rationales_x"),
+    });
+
+    int currentIndex = 0;
+    string[] words = null;
+    int[] words_selected;
+
+    async Task selectWord(int index, string id)
+    {
+        if (words_selected[index] == 0)
+        {
+            words_selected[index] = 1;
+        }
+        else
+        {
+            words_selected[index] = 0;
+        }
+
+        foreach (var item in words_selected)
+        {
+
+            Debug.WriteLine(item);
+        }
+
+        await JS.InvokeAsync<string>("change_bg", id, words_selected[index]);
+    }
+
+    private void ChangeRow()
+    {
+        finalDf = finalDf.Append(new List<object> {
+            df.Rows[currentIndex][0], 
+            df.Rows[currentIndex][1],
+            df.Rows[currentIndex][2],
+            df.Rows[currentIndex][3],
+            df.Rows[currentIndex][4],
+            string.Join(";", words_selected)
+        });
+
+        saveDir = FileSystem.Current.AppDataDirectory + @"\samples_annotated.csv";
+        DataFrame.SaveCsv(finalDf, saveDir);
+
+        if (currentIndex + 1 == df.Rows.Count)
+        {
+            isDone = true;
+        }
+        else
+        {
+            currentIndex += 1;
+            words = df.Rows[currentIndex][1].ToString().Split(" ");
+            words_selected = new int[words.Length];
+        }
+    }
+
+
+    private async Task ReadDataV1()
+    {
+        using var stream = await FileSystem.OpenAppPackageFileAsync("wwwroot/samples/samples.csv");
+        using var reader = new StreamReader(stream);
+
+        var s = await reader.ReadToEndAsync();
+
+        df = DataFrame.LoadCsvFromString(s);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ReadDataV1();
+        words = df.Rows[currentIndex][1].ToString().Split(" ");
+        words_selected = new int[words.Length];
+    }
+}

@@ -1,0 +1,22 @@
+﻿@page "/counter"
+@using MauiApp2.Data
+@using Microsoft.ML
+@using Microsoft.Data.Analysis
+
+@*<h1>This</h1>*@
+
+@foreach (var item in df.Rows)
+{
+    <p role="status">Current count: @item</p>
+}
+
+<button class="btn btn-primary" @onclick="ReadData">Click me</button>
+
+@code {
+    DataFrame df = new DataFrame();
+
+    private void ReadData()
+    {
+        df = DataFrame.LoadCsv(@"C:\Users\muham\source\repos\MauiApp2\MauiApp2\AnnotationFiles\samples\samples_0_500.csv");
+    }
+}
