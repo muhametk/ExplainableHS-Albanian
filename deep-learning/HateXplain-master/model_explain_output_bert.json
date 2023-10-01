@@ -1,0 +1,87 @@
+{
+    "classification_scores": {
+        "accuracy": 1.0,
+        "aopc_thresholds": null,
+        "comprehensiveness": -0.0034962869753503495,
+        "comprehensiveness_aopc": null,
+        "comprehensiveness_aopc_points": null,
+        "comprehensiveness_entropy": 0.0066878465800765015,
+        "comprehensiveness_kl": 0.0005601403537575408,
+        "prf": {
+            "accuracy": 1.0,
+            "macro avg": {
+                "f1-score": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 2375
+            },
+            "non-toxic": {
+                "f1-score": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 2061
+            },
+            "toxic": {
+                "f1-score": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 314
+            },
+            "weighted avg": {
+                "f1-score": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "support": 2375
+            }
+        },
+        "sufficiency": -0.017371423684867323,
+        "sufficiency_aopc": null,
+        "sufficiency_aopc_points": null,
+        "sufficiency_entropy": 0.03230308657939985,
+        "sufficiency_kl": 0.0029898170333176855
+    },
+    "iou_scores": [
+        {
+            "macro": {
+                "f1": 0.04949297609079916,
+                "p": 0.0302547770700637,
+                "r": 0.13592233009708737
+            },
+            "micro": {
+                "f1": 0.04819277108433735,
+                "p": 0.029355456285896617,
+                "r": 0.13450292397660818
+            },
+            "threshold": 0.5
+        }
+    ],
+    "rationale_prf": {
+        "instance_macro": {
+            "f1": 0.0030330603579011226,
+            "p": 0.0019108280254777072,
+            "r": 0.007961783439490446
+        },
+        "instance_micro": {
+            "f1": 0.003143006809848088,
+            "p": 0.0019144862795149968,
+            "r": 0.008771929824561403
+        }
+    },
+    "token_prf": {
+        "instance_macro": {
+            "f1": 0.30057502003518816,
+            "p": 0.3283439490445862,
+            "r": 0.3238695803762054
+        },
+        "instance_micro": {
+            "f1": 0.2814895947426068,
+            "p": 0.32801531589023614,
+            "r": 0.24652278177458034
+        }
+    },
+    "token_soft_metrics": {
+        "auprc": NaN,
+        "average_precision": 0.43250845504151214,
+        "roc_auc_score": 0.5617973954598239
+    }
+}

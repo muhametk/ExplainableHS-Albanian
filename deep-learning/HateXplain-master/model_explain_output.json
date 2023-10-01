@@ -1,0 +1,87 @@
+{
+    "classification_scores": {
+        "accuracy": 0.9730526315789474,
+        "aopc_thresholds": null,
+        "comprehensiveness": 0.16766256511591043,
+        "comprehensiveness_aopc": null,
+        "comprehensiveness_aopc_points": null,
+        "comprehensiveness_entropy": -0.07961590885014048,
+        "comprehensiveness_kl": 0.117867162630656,
+        "prf": {
+            "accuracy": 0.9730526315789474,
+            "macro avg": {
+                "f1-score": 0.9356178819638579,
+                "precision": 0.9849411764705882,
+                "recall": 0.8980891719745223,
+                "support": 2375
+            },
+            "non-toxic": {
+                "f1-score": 0.9847109412326803,
+                "precision": 0.9698823529411764,
+                "recall": 1.0,
+                "support": 2061
+            },
+            "toxic": {
+                "f1-score": 0.8865248226950355,
+                "precision": 1.0,
+                "recall": 0.7961783439490446,
+                "support": 314
+            },
+            "weighted avg": {
+                "f1-score": 0.9717297028239137,
+                "precision": 0.9738642229102167,
+                "recall": 0.9730526315789474,
+                "support": 2375
+            }
+        },
+        "sufficiency": -0.08029409333660155,
+        "sufficiency_aopc": null,
+        "sufficiency_aopc_points": null,
+        "sufficiency_entropy": 0.3018507542847196,
+        "sufficiency_kl": 0.22338293625254083
+    },
+    "iou_scores": [
+        {
+            "macro": {
+                "f1": 0.040685135272911704,
+                "p": 0.025159235668789817,
+                "r": 0.10625674217907226
+            },
+            "micro": {
+                "f1": 0.03981141959140912,
+                "p": 0.024250159540523293,
+                "r": 0.1111111111111111
+            },
+            "threshold": 0.5
+        }
+    ],
+    "rationale_prf": {
+        "instance_macro": {
+            "f1": 0.0030330603579011226,
+            "p": 0.0019108280254777072,
+            "r": 0.007961783439490446
+        },
+        "instance_micro": {
+            "f1": 0.003143006809848088,
+            "p": 0.0019144862795149968,
+            "r": 0.008771929824561403
+        }
+    },
+    "token_prf": {
+        "instance_macro": {
+            "f1": 0.19611300644443264,
+            "p": 0.21751592356687924,
+            "r": 0.21271160489582616
+        },
+        "instance_micro": {
+            "f1": 0.18619934282584885,
+            "p": 0.2169751116783663,
+            "r": 0.1630695443645084
+        }
+    },
+    "token_soft_metrics": {
+        "auprc": NaN,
+        "average_precision": 0.3257340211666307,
+        "roc_auc_score": 0.41845463162629454
+    }
+}
